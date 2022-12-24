@@ -20,9 +20,9 @@ app.get("/api/reviews", (req, res) => {
    
   let data =  client.db("CropBox").collection("UsersReview").find({}).toArray();
   let response  = "";
-  for (i in data) 
+  for(i in data) 
   {
-    response+=" - "+i;
+    response +=" - "+data[i];
   }
   //data = client.db().admin().listDatabases();
   res.send(response);
