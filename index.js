@@ -18,8 +18,11 @@ client.connect();
 
 app.get("/api/reviews", (req, res) => {
   
-  let data = client.db("CropBox").collection("UsersReview").findOne({});
-  res.send(data);
+  let data = client.db("CropBox").collection("UsersReview").find({}).exec(function (err, data) 
+  {
+    res.send(res.send(data));
+  });
+ 
 
 });
 
