@@ -10,8 +10,42 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.get("/test/best", (req, res) => {
-  res.send("successful/best");
+  var data = "";
+
+  async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+   
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`),data+=db.name );
+  };
+  
+  async function main(){
+
+    const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+ 
+    const client = new MongoClient(uri);
+ 
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        // Make the appropriate DB calls
+        await  listDatabases(client);
+ 
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+
+app.get("/api/getfeedbacks", (req, res) => {
+
+  res.send(data);
+
 });
 
 app.use(express.static(path.join(__dirname, "./index.html")));
