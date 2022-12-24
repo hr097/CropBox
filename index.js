@@ -47,7 +47,7 @@ main().catch(console.error);
 
 app.get("/api/getfeedbacks", (req, res) => {
   
-  let data = client.db("CropBox").collection("UsersReview").find().pretty();
+  let data = client.db("CropBox").collection("UsersReview").find();
   res.send(data);
 
 });
