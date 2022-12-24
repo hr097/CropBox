@@ -10,13 +10,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-  var data = "";
+  var data1 = "";
 
   async function listDatabases(client){
     databasesList = await client.db().admin().listDatabases();
    
     console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`),data+=db.name );
+    databasesList.databases.forEach(
+      db => { 
+      console.log(` - ${db.name}`)
+      data1+=` - ${db.name}` 
+    });
   };
   
   async function main(){
@@ -44,7 +48,7 @@ main().catch(console.error);
 
 app.get("/api/getfeedbacks", (req, res) => {
 
-  res.send(data);
+  res.send(data1);
 
 });
 
