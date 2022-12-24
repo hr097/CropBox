@@ -14,11 +14,11 @@ app.get("/test/best", (req, res) => {
   res.send("successful/best");
 });
 
-app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.use(express.static(path.join(__dirname, "./index.html")));
 
 app.get("*", function (_, res) {
   res.sendFile(
-    path.join(__dirname, "./frontend/build/index.html"),
+    path.join(__dirname, "./index.html"),
     function (err) {
       if (err) {
         res.status(500).send(err);
