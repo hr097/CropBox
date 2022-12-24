@@ -16,10 +16,21 @@ const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mo
 const client = new MongoClient(uri);
 client.connect();
 
+
 app.get("/api/reviews", (req, res) => {
    
-  let data =  client.db("CropBox").collection("UsersReview").find({}).toArray();
-  res.send(data);
+  client.db("CropBox").collection("UsersReview").find({}).toArray().exec(function(err,dt){
+
+    if(err)
+    {
+      res.send("No");
+    }
+    else
+    {
+      res.send(dt); 
+    }
+  });
+  
 });
 
 app.use(express.static(path.join(__dirname, "./index.html")));
