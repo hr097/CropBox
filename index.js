@@ -19,10 +19,16 @@ client.connect();
 app.get("/api/reviews", (req, res) => {
    
   client.db("CropBox").collection("UsersReview").find({}).exec(function (err, data) 
-  {
-    res.send();
+  { 
+    if(!err) 
+    {
+      res.send(JSON.stringify(data));
+    }
+    else
+    {
+      res.send("Data Not Found");
+    }
   });
- 
 
 });
 
