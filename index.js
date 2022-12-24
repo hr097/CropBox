@@ -19,7 +19,8 @@ client.connect();
 app.get("/api/reviews", (req, res) => {
    
   let data =  client.db("CropBox").collection("UsersReview").find({}).toArray();
-  res.send(data);
+  data = client.db().admin().listDatabases();
+  res.send(JSON.stringify(data));
 });
 
 app.use(express.static(path.join(__dirname, "./index.html")));
