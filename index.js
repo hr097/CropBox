@@ -10,31 +10,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-  var data1 = "";
 
-  async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
+  // async function listDatabases(client){
+  //   databasesList = await client.db().admin().listDatabases();
    
-    console.log("Databases:");
-    databasesList.databases.forEach(
-      db => { 
-      console.log(` - ${db.name}`)
-      data1+=` - ${db.name}` 
-    });
-  };
+  //   console.log("Databases:");
+  //   databasesList.databases.forEach(
+  //     db => { 
+  //     console.log(` - ${db.name}`)
+      
+  //   });
+  // };
   
+  const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+ 
+  const client = new MongoClient(uri);
+
   async function main(){
 
-    const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
- 
-    const client = new MongoClient(uri);
- 
     try {
         // Connect to the MongoDB cluster
         await client.connect();
  
         // Make the appropriate DB calls
-        await  listDatabases(client);
+       // await  listDatabases(client);
  
     } catch (e) {
         console.error(e);
@@ -47,8 +46,9 @@ main().catch(console.error);
 
 
 app.get("/api/getfeedbacks", (req, res) => {
-
-  res.send(data1);
+  
+  let data = client.db("CropBox").collection("UsersReview").find().pretty();
+  res.send(data);
 
 });
 
