@@ -10,10 +10,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const {MongoClient} = require('mongodb');
+
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect();
 
 app.get("/api/reviews", (req, res) => {
