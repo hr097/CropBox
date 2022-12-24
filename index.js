@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.get("/test", (req, res) => {
-  res.send("successful");
+app.get("/test/best", (req, res) => {
+  res.send("successful/best");
 });
 
 app.use(express.static(path.join(__dirname, "./frontend/build")));
