@@ -70,14 +70,13 @@ app.post("/api/submitfeedback", async (req, res) => {
     "feedback_time_stamp" : curdate
   };
 
-   let result = await client.db("CropBox").collection("UsersReview").insertOne(myObj);
-   result.then(
-    function(value) {
-      res.send("Your Feedback Has Been Posted Successfully");
-    },
-    function(error) {res.send(res.send("Unable to Post Feedback!!!"));}
-  );
-  
+    let result = await client.db("CropBox").collection("UsersReview").insertOne(myObj);
+
+    if(result.acknowledged==true)
+    res.send("Your Feedback Has Been Posted Successfully");
+    else
+    res.send("Unable to Post Feedback!!!")
+
   }
   else
   {
