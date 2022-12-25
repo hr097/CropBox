@@ -65,8 +65,8 @@ app.get("/api/getfeedbacks", (req, res) => {
   
   if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.body.api_token=="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
   { 
-    const setLimit = (req.body.numOfFeedBacks);
-    client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimit)).toArray().then( (data) => {
+    const setLimitX = (req.body.numOfFeedBacks);
+    client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimitX)).toArray().then( (data) => {
       return res.send(data);
      })
      .catch( (err) => {
