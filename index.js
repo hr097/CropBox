@@ -15,19 +15,21 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect().then( () => {
-  console.log('Connected to the database ')
+  console.log('Connected to the database ');
 })
 .catch( (err) => {
   console.error(`Error connecting to the database. n${err}`);
 });
 
 app.get("/api/reviews", (req, res) => {
-  client.db("CropBox").collection("UsersReview").find({},function(err,result){
-    if(err) return res.send(err);
-    else
-    return res.send(result);
-  });
 
+  client.db("CropBox").collection("UsersReview").find({}).toArray().then( (data) => {
+    return res.send(data);
+   })
+   .catch( (err) => {
+    return (`Error connecting to the database. n${err}`);
+   });
+  
 });
 
 app.use(express.static(path.join(__dirname, "./index.html")));
