@@ -51,7 +51,7 @@ sample object:
 
 
 
-app.post("/api/submitfeedback", (req, res) => {
+app.post("/api/submitfeedback", async (req, res) => {
   
   const user = req.body;
 
@@ -61,7 +61,7 @@ app.post("/api/submitfeedback", (req, res) => {
   let curdate = new Date();
   curdate = curdate.toLocaleString();
   let rating = parseInt(user.rating);
-  
+
   const myObj = {
     "name": user.name,
     "email": user.email,
@@ -70,14 +70,15 @@ app.post("/api/submitfeedback", (req, res) => {
     "feedback_time_stamp" : curdate
   };
 
-   client.db("CropBox").collection("UsersReview").insertOne(myObj
-    ,function(err, res) {
-      if (err)
-      return res.send(`Error connecting to the database. n${err}`);
-      else
-      return res.send("Thank you! Your Feedback Posted Successfully.");
-    });
+   let result = await client.db("CropBox").collection("UsersReview").insertOne(myObj);
+   res.send(result);
 
+  //  ,function(err,res) {
+  //   if (err)
+  //   return res.send(`Error connecting to the database. n${err}`);
+  //   else
+  //   return res.send("Thank you! Your Feedback Posted Successfully.");
+  // });
   }
   else
   {
