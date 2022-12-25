@@ -53,7 +53,7 @@ app.post("/api/submitfeedback", (req, res) => {
 // GET FEEDBACKS API
 app.get("/api/getfeedbacks", (req, res) => {
   
-  const howMany = req.body.how_many;
+  let howMany = req.body.how_many;
   if(howMany==undefined)
   howMany==1;
 
