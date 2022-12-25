@@ -16,6 +16,22 @@ const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mo
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect().then( () => {
   console.log('Connected to the database ');
+  
+  // const myObj = {
+  //   "name": "1user.name",
+  //   "email": "1user.email",
+  //   "rating": 5,
+  //   "description": "user.description",
+  //   "feedback_time_stamp" : "12/25/2022, 3:25:14 PM"
+  // };
+  // client.db("CropBox").collection("UsersReview").insertOne(myObj
+  //   ,function(err, res) {
+  //     if (err)
+  //     console.log(`Error connecting to the database. n${err}`);
+  //     else
+  //     console.log("Thank you! Your Feedback Posted Successfully.");
+  //   });
+
 })
 .catch( (err) => {
   console.error(`Error connecting to the database. n${err}`);
@@ -44,11 +60,12 @@ app.post("/api/submitfeedback", (req, res) => {
   
   let curdate = new Date();
   curdate = curdate.toLocaleString();
-
+  let rating = parseInt(user.rating);
+  
   const myObj = {
     "name": user.name,
     "email": user.email,
-    "rating": parseInt(user.rating),
+    "rating": rating,
     "description": user.description,
     "feedback_time_stamp" : curdate
   };
