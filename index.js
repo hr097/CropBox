@@ -55,9 +55,9 @@ app.post("/api/submitfeedback", (req, res) => {
     ,function(err, res) {
       client.close();
       if (err)
-      return res.send(`Error connecting to the database. n${err}`);
+      res.send(`Error connecting to the database. n${err}`);
       else
-      return res.send("Thank you! Your Feedback Posted Successfully.");
+      res.send("Thank you! Your Feedback Posted Successfully.");
     });
     
   //  .then( (result) => {
