@@ -53,14 +53,31 @@ app.post("/api/submitfeedback", (req, res) => {
 // GET FEEDBACKS API
 app.get("/api/getfeedbacks", (req, res) => {
   
-  let hm = (req.body.howmany=="")?1:req.body.howmany;
+  
 
-  client.db("CropBox").collection("UsersReview").find({}).limit(hm).toArray().then( (data) => {
-    return res.send(data);
-   })
-   .catch( (err) => {
-    return res.send(`Error connecting to the database. n${err}`);
-   });
+  if(req.body = "{}")
+  {
+    res.send("{}");
+  }
+  else if(req.body == undefined)
+  {
+    res.send("undefined");
+  }
+  else if(req.body == null)
+  {
+    res.send("null");
+  }
+  else
+  {
+    res.send("unknown");
+  }
+
+  // client.db("CropBox").collection("UsersReview").find({}).limit(hm).toArray().then( (data) => {
+  //   return res.send(data);
+  //  })
+  //  .catch( (err) => {
+  //   return res.send(`Error connecting to the database. n${err}`);
+  //  });
   
 });
 
