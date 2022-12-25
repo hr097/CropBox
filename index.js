@@ -22,15 +22,8 @@ client.connect().then( () => {
 });
 
 app.get("/api/reviews", (req, res) => {
-   
-  client.db("CropBox").collection("UsersReview").find({},function(err,result){
-    if(err) return res.send(err.message);
-    else
-    {
-      res.send(result);
-    }
-  });
-  
+   let data =  client.db("CropBox").collection("UsersReview").find({}).toArray();
+ return res.send(data);
 });
 
 app.use(express.static(path.join(__dirname, "./index.html")));
