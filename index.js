@@ -40,19 +40,20 @@ app.post("/api/submitfeedback", (req, res) => {
   if(user.api_token == "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
   {
   
-  const Review = {
-    name: user.name,
-    email: user.email,
-    rating: user.rating,
-    description: user.description,
-    feedback_time_stamp : new Date() 
+  const myObj = {
+    "name": user.name,
+    "email": user.email,
+    "rating": user.rating,
+    "description": user.description,
+    "feedback_time_stamp" : new Date() 
   };
-  client.db("CropBox").collection("UsersReview").insertOne(Review).then( (data) => {
+
+  client.db("CropBox").collection("UsersReview").insertOne(myObj,function(err,result){
+    if(!err)
     return res.send("Thank you! Your Feedback Posted Successfully.");
-   })
-   .catch( (err) => {
+    else
     return res.send(`Error connecting to the database. n${err}`);
-   });
+  })
 
   }
   else
