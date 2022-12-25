@@ -40,7 +40,9 @@ app.post("/api/submitfeedback", (req, res) => {
   if(user.api_token == "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
   {
   
-  const curdate = new Date().toLocaleString();
+  let curdate = new Date();
+  curdate = curdate.toLocaleString();
+
   const myObj = {
     "name": user.name,
     "email": user.email,
