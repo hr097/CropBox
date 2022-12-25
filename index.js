@@ -58,11 +58,11 @@ app.get("/api/getfeedbacks", (req, res) => {
   {
     res.send("{}");
   }
-  else if(req.body == undefined)
+  else if(req.body.howmany == undefined)
   {
     res.send("undefined");
   }
-  else if(req.body == null)
+  else if(req.body.howmany == null)
   {
     res.send("null");
   }
