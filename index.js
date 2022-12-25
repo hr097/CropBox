@@ -71,18 +71,17 @@ app.post("/api/submitfeedback", async (req, res) => {
   };
 
    let result = await client.db("CropBox").collection("UsersReview").insertOne(myObj);
-   res.send(result);
-
-  //  ,function(err,res) {
-  //   if (err)
-  //   return res.send(`Error connecting to the database. n${err}`);
-  //   else
-  //   return res.send("Thank you! Your Feedback Posted Successfully.");
-  // });
+   result.then(
+    function(value) {
+      res.send("Your Feedback Has Been Posted Successfully");
+    },
+    function(error) {res.send(res.send("Unable to Post Feedback!!!"));}
+  );
+  
   }
   else
   {
-    return res.send(`Invalid Request!!!!`);
+    res.send(`Invalid Request!!!!`);
   }
 
 });
@@ -105,10 +104,10 @@ app.get("/api/getfeedbacks", (req, res) => {
   { 
     const setLimitX = (req.body.numOfFeedBacks);
     client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimitX)).toArray().then( (data) => {
-      return res.send(data);
+       res.send(data);
      })
      .catch( (err) => {
-      return res.send(`Error connecting to the database. n${err}`);
+      res.send(`Error connecting to the database. n${err}`);
      });
   }
   else
