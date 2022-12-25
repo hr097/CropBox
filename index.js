@@ -55,7 +55,7 @@ app.get("/api/getfeedbacks", (req, res) => {
   
   let setLimit = (req.body.howmany == undefined)?1:req.body.howmany;
 
-  client.db("CropBox").collection("UsersReview").find({}).limit(setLimit).toArray().then( (data) => {
+  client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimit)).toArray().then( (data) => {
     return res.send(data);
    })
    .catch( (err) => {
