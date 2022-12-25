@@ -53,9 +53,8 @@ app.post("/api/submitfeedback", (req, res) => {
 // GET FEEDBACKS API
 app.get("/api/getfeedbacks", (req, res) => {
   
-  
 
-  if(req.body = "{}")
+  if(req.body == "{}")
   {
     res.send("{}");
   }
