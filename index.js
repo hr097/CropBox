@@ -21,13 +21,42 @@ client.connect().then( () => {
   console.error(`Error connecting to the database. n${err}`);
 });
 
-app.get("/api/reviews", (req, res) => {
+app.post("/api/submitfeedback", (req, res) => {
+  
+  const user = req.body;
 
-  client.db("CropBox").collection("UsersReview").find({}).toArray().then( (data) => {
+  if(user.crsfToken == "1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261itie")
+  {
+  
+  const Review = {
+    name: user.name,
+    email: user.email,
+    rating: user.rating,
+    description: user.description 
+  };
+  client.db("CropBox").collection("UsersReview").insertOne(Review).then( (data) => {
+    return res.send("Thank you! Your Feedback Posted Successfully.");
+   })
+   .catch( (err) => {
+    return res.send(`Error connecting to the database. n${err}`);
+   });
+
+  }
+  else
+  {
+    return res.send(`Invalid Request!!!!`);
+  }
+
+});
+
+app.post("/api/getfeedbacks", (req, res) => {
+  
+  const howMany = req.body.how_many;
+  client.db("CropBox").collection("UsersReview").find({}).limit(howMany).toArray().then( (data) => {
     return res.send(data);
    })
    .catch( (err) => {
-    return (`Error connecting to the database. n${err}`);
+    return res.send(`Error connecting to the database. n${err}`);
    });
   
 });
