@@ -42,9 +42,12 @@ client.connect().then( () => {
 /*
 sample object:
 
-{
-    "api_token":"cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
-    "numOfFeedBacks":10
+ {   
+    "api_token" : "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
+    "name": "Harshil Ramani",
+    "email": "harshilramani9777@gmail.com",
+    "rating": 5,
+    "description": "It's an amazing app!"
 }
 
 */
