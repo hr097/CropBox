@@ -51,22 +51,14 @@ app.post("/api/submitfeedback", (req, res) => {
     "feedback_time_stamp" : curdate
   };
 
-     // ,function(err, res) {
-    //   if (err)
-    //   res.send(`Error connecting to the database. n${err}`);
-    //   else
-    //   res.send("Thank you! Your Feedback Posted Successfully.");
-    // });
+   client.db("CropBox").collection("UsersReview").insertOne(myObj
+    ,function(err, res) {
+      if (err)
+      res.send(`Error connecting to the database. n${err}`);
+      else
+      res.send("Thank you! Your Feedback Posted Successfully.");
+    });
     
-   client.db("CropBox").collection("UsersReview").insertOne(myObj).then( (result) => {
-    client.close();
-    return res.send("Thank you! Your Feedback Posted Successfully.");
-   })
-   .catch( (err) => {
-    return res.send(`Error connecting to the database. n${err}`);
-   })
-   
-
   }
   else
   {
