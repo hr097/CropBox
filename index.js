@@ -51,12 +51,12 @@ app.post("/api/submitfeedback", (req, res) => {
 });
 
 // GET FEEDBACKS API
-app.post("/api/getfeedbacks", (req, res) => {
+app.get("/api/getfeedbacks", (req, res) => {
   
   const howMany = req.body.how_many;
   if(howMany==undefined)
   howMany==1;
-  
+
   client.db("CropBox").collection("UsersReview").find({}).limit(howMany).toArray().then( (data) => {
     return res.send(data);
    })
