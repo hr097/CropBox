@@ -10,17 +10,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+const mongoose = require('mongoose')
+const url = `mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+mongoose.connect(url)
+    .then( () => {
+        console.log('Connected to the database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. n${err}`);
+    })
 
+// const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
-const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect();
+// const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect();
 
 app.get("/api/reviews", (req, res) => {
    
-  let data =  client.db("CropBox").collection("UsersReview").find({}).toArray();
+  let data =  mongoose.db("CropBox").collection("UsersReview").find({}).toArray();
   res.send(data);
 });
 
