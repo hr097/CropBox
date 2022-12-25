@@ -21,19 +21,31 @@ client.connect().then( () => {
   console.error(`Error connecting to the database. n${err}`);
 });
 
-// SUBMIT FEEDBACK API
+//TODO: SUBMIT FEEDBACK API
+
+/*
+sample object:
+
+{
+    "api_token":"cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
+    "numOfFeedBacks":10
+}
+
+*/
+
 app.post("/api/submitfeedback", (req, res) => {
   
   const user = req.body;
 
-  if(user.crsfToken == "1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261itie")
+  if(user.api_token == "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
   {
   
   const Review = {
     name: user.name,
     email: user.email,
     rating: user.rating,
-    description: user.description 
+    description: user.description,
+    feedback_time_stamp : new Date() 
   };
   client.db("CropBox").collection("UsersReview").insertOne(Review).then( (data) => {
     return res.send("Thank you! Your Feedback Posted Successfully.");
@@ -56,7 +68,8 @@ app.post("/api/submitfeedback", (req, res) => {
 sample object:
 
 {
-  howmany:2
+    "api_token":"cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
+    "numOfFeedBacks":10
 }
 
 */
