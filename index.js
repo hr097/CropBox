@@ -50,22 +50,38 @@ app.post("/api/submitfeedback", (req, res) => {
 
 });
 
-// GET FEEDBACKS API
+//TODO: GET FEEDBACKS API
+
+/*
+sample object:
+
+{
+  howmany:2
+}
+
+*/
+
 app.get("/api/getfeedbacks", (req, res) => {
   
-  let setLimit = (req.body.howmany == undefined)?1:req.body.howmany;
+  if(req.body.numOfFeedBacks!=undefined||req.body.api_token!="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
+  {
+    client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(req.body.numOfFeedBacks)).toArray().then( (data) => {
+      return res.send(data);
+     })
+     .catch( (err) => {
+      return res.send(`Error connecting to the database. n${err}`);
+     });
+  }
+  else
+  {
+    return res.send("Invalid Request!");
+  }
 
-  client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimit)).toArray().then( (data) => {
-    return res.send(data);
-   })
-   .catch( (err) => {
-    return res.send(`Error connecting to the database. n${err}`);
-   });
-  
 });
 
-app.use(express.static(path.join(__dirname, "./index.html")));
+//TODO: MAIN ROUTE
 
+app.use(express.static(path.join(__dirname, "./index.html")));
 app.get("*", function (_, res) {
   res.sendFile(
     path.join(__dirname, "./index.html"),
@@ -77,7 +93,8 @@ app.get("*", function (_, res) {
   );
 });
 
+
+//TODO: SERVER PORT DETAILS
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server Running on port ${port}`));
-
 module.exports = app;
