@@ -53,14 +53,13 @@ app.post("/api/submitfeedback", (req, res) => {
 
    client.db("CropBox").collection("UsersReview").insertOne(myObj)
    .then( (result) => {
+    client.close();
     return res.send("Thank you! Your Feedback Posted Successfully.");
    })
    .catch( (err) => {
     return res.send(`Error connecting to the database. n${err}`);
-   }).finally()
-   {
-    client.close();
-   }
+   })
+   
 
   }
   else
