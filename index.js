@@ -51,8 +51,8 @@ app.post("/api/submitfeedback", (req, res) => {
     "feedback_time_stamp" : curdate
   };
 
-  client.db("CropBox").collection("UsersReview").insertOne(myObj).then(result)
-   .then( (data) => {
+  client.db("CropBox").collection("UsersReview").insertOne(myObj)
+   .then( (result) => {
     return res.send("Thank you! Your Feedback Posted Successfully.");
    })
    .catch( (err) => {
