@@ -8,7 +8,7 @@ function App() {
   //   fetch("/api/submitfeedback",{
   //   body: {   
   //     "api_token" : "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
-  //     "name": "Shubham khunt",
+  //     "name": "Shubham khunt", 
   //     "email": "shubhamkhunt4105gmail.com",
   //     "rating": 4.5,
   //     "description": "It's a fantastic app!"
