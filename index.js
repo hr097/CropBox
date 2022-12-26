@@ -76,8 +76,14 @@ app.post("/api/submitfeedback", async (req, res) => {
 /*
 sample object:
 
+header:
+
+key: api_token
+value : cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261
+
+body:
+
 {
-    "api_token":"cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
     "numOfFeedBacks":10
 }
 
