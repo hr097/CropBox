@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+// import React,{useEffect,useState} from 'react'
+
 import './App.css';
 
 function App() {
+  // const [backdata,setbackdata] = useState([{}]);
+  // useEffect(()=>{
+  //   fetch("/api/submitfeedback",{
+  //   body: {   
+  //     "api_token" : "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
+  //     "name": "Shubham khunt",
+  //     "email": "shubhamkhunt4105gmail.com",
+  //     "rating": 4.5,
+  //     "description": "It's a fantastic app!"
+  // }
+  //   }).then(
+  //     response => response.json()
+  //   ).then(
+  //     data => {
+  //        setbackdata(data);
+  //       console.log(data);
+  //     }
+  //   )
+  // },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <h1>Hello World Vercel Frotend</h1>
     </div>
   );
 }
