@@ -85,7 +85,7 @@ sample object:
 
 app.get("/api/getfeedbacks", (req, res) => {
   
-  if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.body.api_token=="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
+  if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
   { 
     const setLimitX = (req.body.numOfFeedBacks);
     client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimitX)).toArray().then( (data) => {
