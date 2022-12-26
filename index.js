@@ -118,7 +118,7 @@ app.get("/api/getfeedbacks", (req, res) => {
 
 if(process.env.NODE_ENV == 'production')
 {
-  const path = requir('path');
+  const path = require('path');
   app.get('/',(req,res)=>{
     app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
