@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
@@ -105,18 +104,26 @@ app.get("/api/getfeedbacks", (req, res) => {
 
 //TODO: MAIN ROUTE 
 
-app.use(express.static(path.join(__dirname, "./index.html")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
-});
+// app.use(express.static(path.join(__dirname, "./index.html")));
+// app.get("*", function (_, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./index.html"),
+//     function (err) {
+//       if (err) {
+//         res.status(500).send(err);
+//       }
+//     }
+//   );
+// });
 
+if(process.env.NODE_ENV == 'production')
+{
+  const path = requir('path');
+  app.get('/',(req,res)=>{
+    app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
+    res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
+  })
+}
 
 //TODO: SERVER PORT DETAILS
 const port = process.env.PORT || 5000;
