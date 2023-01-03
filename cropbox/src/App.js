@@ -24,7 +24,11 @@ function App() {
   // },[])
   return (
     <div className="App">
-       <h1>Hello World Vercel Frotend</h1>
+        <h1>Select PDF File for crop</h1>
+        <form method="post"  action="/" enctype="multipart/form-data">
+          <input type="file" name="file"/>
+          <input type="submit" value="Upload" />
+        </form>
     </div>
   );
 }
