@@ -9,22 +9,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// app.post('/',(req,res)=>{
-//   if(req.files)
-//   {
-//     var file = req.files.file;
-//     file.mv('./upload/'+file.name,function(err)
-//     {
-//       if(err)
-//       {
-//         res.send(err);
-//       }
-//       else{
-//         res.send("File has been uploaded");
-//       }
-//     })
-//   }
-// })
+app.post('/',(req,res)=>{
+  if(req.files)
+  {
+    var file = req.files.file;
+    file.mv('./upload/'+file.name,function(err)
+    {
+      if(err)
+      {
+        res.send(err);
+      }
+      else{
+        res.send("File has been uploaded");
+      }
+    })
+  }
+})
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
