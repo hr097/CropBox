@@ -12,12 +12,44 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// const upload = multer({ dest: './upload/' })
-// app.post('/stats', upload.single('file'), function (req, res) {
-//    // req.file is the name of your file in the form above, here 'uploaded_file'
-//    // req.body will hold the text fields, if there were any 
-//   console.log(req.file, req.body);
-// });
+const upload = multer({ dest: './upload/' })
+app.post('/upload_file', function (req, res) {
+
+  var storage = multer.diskStorage({
+
+    destination:function(request, file, callback)
+    {
+      callback(null, './upload');
+    },
+    filename : function(request, file, callback)
+    {
+      var temp_file_arr = file.originalname.split(".");
+  
+      var temp_file_name = temp_file_arr[0];
+  
+      var temp_file_extension = temp_file_arr[1];
+  
+      callback(null, temp_file_name + '-' + Date.now() + '.' + temp_file_extension);
+    }
+  
+  });
+  
+  var upload = multer({storage:storage}).single('file');
+  
+  upload(request, response, function(error){
+  
+    if(error)
+    {
+      return response.end('Error Uploading File');
+    }
+    else
+    {
+      return response.end('File is uploaded successfully');
+    }
+  
+  });
+  console.log(req.file, req.body);
+});
 // app.post('/upload',(req,res)=>{
 //   if(req.files)
 //   {

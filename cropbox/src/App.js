@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
         <h1>Select PDF File for crop</h1>
-        <form method="POST"  action="/upload" enctype="multipart/form-data">
+        <form method="post"  action="/upload_file" enctype="multipart/form-data">
           <input type="file" name="file"/>
           <input type="submit" value="Upload" />
         </form>
