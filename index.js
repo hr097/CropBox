@@ -1,6 +1,6 @@
 const express = require("express");
 // const upload = require("express-fileupload");
-// const multer  = require('multer');
+const multer  = require('multer');
 const app = express();
 const path = require("path");
 const logger = require("morgan");
@@ -192,6 +192,6 @@ if(process.env.NODE_ENV == 'production')
 }
 
 //TODO: SERVER PORT DETAILS
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server Running on port ${port}`));
 module.exports = app;
