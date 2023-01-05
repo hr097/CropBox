@@ -1,6 +1,6 @@
 const express = require("express");
 // const upload = require("express-fileupload");
-const multer  = require('multer');
+// const multer  = require('multer');
 const app = express();
 const path = require("path");
 const logger = require("morgan");
@@ -12,44 +12,44 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const upload = multer({ dest: './upload/' })
-app.post('/upload_file', function (req, res) {
+// const upload = multer({ dest: './upload/' })
+// app.post('/upload_file', function (req, res) {
 
-  var storage = multer.diskStorage({
+//   var storage = multer.diskStorage({
 
-    destination:function(request, file, callback)
-    {
-      callback(null, './upload');
-    },
-    filename : function(request, file, callback)
-    {
-      var temp_file_arr = file.originalname.split(".");
+//     destination:function(request, file, callback)
+//     {
+//       callback(null, './upload');
+//     },
+//     filename : function(request, file, callback)
+//     {
+//       var temp_file_arr = file.originalname.split(".");
   
-      var temp_file_name = temp_file_arr[0];
+//       var temp_file_name = temp_file_arr[0];
   
-      var temp_file_extension = temp_file_arr[1];
+//       var temp_file_extension = temp_file_arr[1];
   
-      callback(null, temp_file_name + '-' + Date.now() + '.' + temp_file_extension);
-    }
+//       callback(null, temp_file_name + '-' + Date.now() + '.' + temp_file_extension);
+//     }
   
-  });
+//   });
   
-  var upload = multer({storage:storage}).single('file');
+//   var upload = multer({storage:storage}).single('file');
   
-  upload(request, response, function(error){
+//   upload(request, response, function(error){
   
-    if(error)
-    {
-      return response.end('Error Uploading File');
-    }
-    else
-    {
-      return response.end('File is uploaded successfully');
-    }
+//     if(error)
+//     {
+//       return response.end('Error Uploading File');
+//     }
+//     else
+//     {
+//       return response.end('File is uploaded successfully');
+//     }
   
-  });
-  console.log(req.file, req.body);
-});
+//   });
+//   console.log(req.file, req.body);
+// });
 // app.post('/upload',(req,res)=>{
 //   if(req.files)
 //   {
