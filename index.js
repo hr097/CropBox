@@ -1,5 +1,6 @@
 const express = require("express");
 // const upload = require("express-fileupload");
+const multer  = require('multer')
 const app = express();
 const path = require("path");
 const logger = require("morgan");
@@ -10,25 +11,30 @@ app.use(logger("dev"));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-// app.use(upload());
 
-app.post('/upload',(req,res)=>{
-  if(req.files)
-  {
-    var file = req.files.file;
-    console.log(file.name);
-    file.mv('./upload/'+file.name,function(err)
-    {
-      if(err)
-      {
-        res.send(err);
-      }
-      else{
-        res.send("File has been uploaded");
-      }
-    })
-  }
-})
+const upload = multer({ dest: './upload/' })
+app.post('/stats', upload.single('file'), function (req, res) {
+   // req.file is the name of your file in the form above, here 'uploaded_file'
+   // req.body will hold the text fields, if there were any 
+  console.log(req.file, req.body);
+});
+// app.post('/upload',(req,res)=>{
+//   if(req.files)
+//   {
+//     var file = req.files.file;
+//     console.log(file.name);
+//     file.mv('./upload/'+file.name,function(err)
+//     {
+//       if(err)
+//       {
+//         res.send(err);
+//       }
+//       else{
+//         res.send("File has been uploaded");
+//       }
+//     })
+//   }
+// })
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
