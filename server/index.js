@@ -3,6 +3,7 @@
 
 const path = require('path');
 const express = require('express');
+const fileUpload = require('../lib/index');
 const app = express(); 
 const http = require('http');
 const logger = require("morgan");
@@ -13,6 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
 
+
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
 
 const port = process.env.PORT || 3000;
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -47,6 +53,31 @@ sample call object:
 }
 
 */
+
+app.post('/api/upload', function(req, res) {
+  let sampleFile;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send('No files were uploaded.');
+    return;
+  }
+
+  res.send('File data : ' + req.files.pdf.data);
+
+  // sampleFile = req.files.sampleFile;
+
+  // uploadPath = __dirname + '/uploads/' + sampleFile.name;
+
+  // sampleFile.mv(uploadPath, function(err) {
+  //   if (err) {
+  //     return res.status(500).send(err);
+  //   }
+
+  //   res.send('File uploaded to ' + uploadPath);
+  // });
+});
+
 
 
 app.post("/api/submitfeedback", async (req, res) => {
@@ -101,9 +132,9 @@ app.post("/api/submitfeedback", async (req, res) => {
   
   */
 
-app.get("/api/testapi", (req, res) => {
-      return res.send("It's good to go!");
-});
+// app.get("/api/testapi", (req, res) => {
+//       return res.send("It's good to go!");
+// });
   
 app.get("/api/getfeedbacks", (req, res) => {
     
