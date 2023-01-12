@@ -5,6 +5,15 @@ const path = require('path');
 const express = require('express');
 const app = express(); 
 const http = require('http');
+const logger = require("morgan");
+const cors = require("cors");
+
+app.use(logger("dev"));
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: false }));
+app.use(cors())
+
+
 const port = process.env.PORT || 3000;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
@@ -91,6 +100,10 @@ app.post("/api/submitfeedback", async (req, res) => {
   }
   
   */
+
+  app.get("/api/testapi", (req, res) => {
+      return res.send("It's good to go!");
+  });
   
   app.get("/api/getfeedbacks", (req, res) => {
     

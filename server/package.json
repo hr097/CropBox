@@ -9,9 +9,11 @@
   "author": "Team CropBox:HR,Archit,Shubham",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "mongoose": "^6.8.3",
+    "morgan": "^1.10.0",
     "path": "^0.12.7"
   }
 }
