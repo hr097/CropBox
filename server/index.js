@@ -101,11 +101,11 @@ app.post("/api/submitfeedback", async (req, res) => {
   
   */
 
-  app.get("/api/testapi", (req, res) => {
+app.get("/api/testapi", (req, res) => {
       return res.send("It's good to go!");
-  });
+});
   
-  app.get("/api/getfeedbacks", (req, res) => {
+app.get("/api/getfeedbacks", (req, res) => {
     
     if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
     { 
@@ -122,14 +122,14 @@ app.post("/api/submitfeedback", async (req, res) => {
       return res.send("Invalid Request!");
     }
   
-  });
+});
   
 
-  app.get('/',(req,res)=>{
+app.get("/",(req,res)=>{
     console.log(path.resolve(path.resolve(__dirname,".."), 'client','build'));
     app.use(express.static(path.resolve(path.resolve(__dirname,".."), 'client','build')))
     res.sendFile(path.resolve(path.resolve(__dirname,".."),'client','build','index.html'))
-  })
+})
 
 app.listen(port, () => console.log(`Server Running on port ${port}`));
 module.exports = app;
