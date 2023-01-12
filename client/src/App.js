@@ -6,17 +6,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-           Tested Successfully
-        </a>
+        <form ref='uploadForm' 
+            id='uploadForm' 
+            action='/api/upload' 
+            method='post' 
+            encType="multipart/form-data">
+              <input type="file" name="pdf" />
+              <input type='submit' value='Upload' />
+          </form>	
       </header>
     </div>
   );
