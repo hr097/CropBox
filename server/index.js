@@ -28,10 +28,10 @@ client.connect().then( () => {
   console.error(`Error connecting to the database. n${err}`);
 });
 
-app.get('/',(req,res)=>{
-    app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
-    res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
-});
+// app.get('/',(req,res)=>{
+//     app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
+//     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
+// });
 
 //TODO: SUBMIT FEEDBACK API
 
