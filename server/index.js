@@ -3,9 +3,9 @@
 
 const path = require('path');
 const express = require('express');
-const fileUpload = require('../lib/index');
+const fileUpload = require('express-fileupload');
 const app = express(); 
-const http = require('http');
+// const http = require('http');
 const logger = require("morgan");
 const cors = require("cors");
 
