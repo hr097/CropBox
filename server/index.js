@@ -63,7 +63,7 @@ app.post('/api/upload', function(req, res) {
   //   return;
   // }
 
-  res.send('File data : ' + req.files.pdf.data);
+  res.send('File data : '+ req.files.pdf.tempFilePath +" after "+ req.files.pdf.data);
 
   // sampleFile = req.files.sampleFile;
 
