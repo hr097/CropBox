@@ -126,6 +126,7 @@ app.post("/api/submitfeedback", async (req, res) => {
   
 
   app.get('/',(req,res)=>{
+    console.log(path.resolve(path.resolve(__dirname,".."), 'client','build'));
     app.use(express.static(path.resolve(path.resolve(__dirname,".."), 'client','build')))
     res.sendFile(path.resolve(path.resolve(__dirname,".."),'client','build','index.html'))
   })
