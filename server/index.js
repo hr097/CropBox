@@ -126,8 +126,8 @@ app.post("/api/submitfeedback", async (req, res) => {
   
 
   app.get('/',(req,res)=>{
-    app.use(express.static(path.resolve(path.join(__dirname,".."), 'client','build')))
-    res.sendFile(path.resolve(path.join(__dirname,".."),'client','build','index.html'))
+    app.use(express.static(path.resolve(path.resolve(__dirname,".."), 'client','build')))
+    res.sendFile(path.resolve(path.resolve(__dirname,".."),'client','build','index.html'))
   })
 
 app.listen(port, () => console.log(`Server Running on port ${port}`));
