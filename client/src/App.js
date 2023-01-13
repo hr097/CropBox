@@ -21,9 +21,9 @@ function App() {
                 or
                   <input type="file"  name="pdf" id="pdfs" accept=".pdf" required/>
               
-                  <select id="plateform" name="plateform">
-                    <option value="1">Flipkart</option>
-                    <option value="2">Meesho</option>
+                  <select id="plateform" name="plateform" required>
+                    <option value="flipkart">Flipkart</option>
+                    <option value="meesho">Meesho</option>
                   </select>
 
                   <input type='submit' class="button-1" role="button" value='Upload' />

@@ -55,27 +55,33 @@ sample call object:
 */
 
 app.post('/api/upload', function(req, res) {
-  // let sampleFile;
-  // let uploadPath;
 
-  if (!req.files || Object.keys(req.files).length === 0) {
-    res.status(400).send('No files were uploaded.');
-    return;
+  let fileName_ = req.files.pdf.name;
+
+  let fileExtention_= fileName_.slice(fileName_.lastIndexOf('.'));
+  
+  // if (!req.files || Object.keys(req.files).length === 0) {
+  //   res.status(400).send('No files were uploaded.');
+  //   return;
+  // }
+  //else 
+  if(fileExtention_!=".pdf")
+  {
+    res.send("Only PDF file is allowed!!");
+  }
+  else if(req.body.plateform=="flipkart")
+  {
+    res.send('Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+  }
+  else if(req.body.plateform=="meesho")
+  {
+    res.send('Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+  }
+  else
+  {
+    res.send('Something went wrong!!');
   }
 
-  res.send('Preference: '+ req.body.plateform +'File data : '+ req.files.pdf.tempFilePath + "data: "+ req.files.pdf.data);
-
-  // sampleFile = req.files.sampleFile;
-
-  // uploadPath = __dirname + '/uploads/' + sampleFile.name;
-
-  // sampleFile.mv(uploadPath, function(err) {
-  //   if (err) {
-  //     return res.status(500).send(err);
-  //   }
-
-  //   res.send('File uploaded to ' + uploadPath);
-  // });
 });
 
 

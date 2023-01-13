@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express-fileupload": "^1.4.0",
-    "express-fileupload-temp-file": "^1.0.0"
+    "express-fileupload-temp-file": "^1.0.0",
+    "fileupload": "^1.0.0"
   }
 }
