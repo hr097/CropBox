@@ -5,6 +5,7 @@ const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express(); 
+var scissors = require('scissors');
 // const http = require('http');
 const logger = require("morgan");
 const cors = require("cors");
@@ -39,6 +40,11 @@ client.connect().then( () => {
 //     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
 // });
 
+
+
+
+
+
 /*
 
 1)header
@@ -71,7 +77,24 @@ app.post('/api/upload', function(req, res) {
    }
    else if(req.body.plateform=="flipkart")
    {
-     res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+     //res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+
+     //TODO: PDF CROPING
+
+    // Use and chain any of these commands...
+    var pdf = scissors(req.files.pdf.tempFilePath)
+    .crop(170, 23,255, 350) // offset in points from left, bottom, right, top (doesn't work reliably yet)
+    .pdfStream();
+
+    res.sendFile(pdf);
+
+    // pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function(){
+    //  console.log("We're done!");
+     
+    // }).on('error',function(err){
+    // res.send(JSON.stringify({"response":500}));
+    // });
+
    }
    else if(req.body.plateform=="meesho")
    {
