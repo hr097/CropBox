@@ -55,15 +55,15 @@ sample call object:
 */
 
 app.post('/api/upload', function(req, res) {
-  let sampleFile;
-  let uploadPath;
+  // let sampleFile;
+  // let uploadPath;
 
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   res.status(400).send('No files were uploaded.');
-  //   return;
-  // }
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send('No files were uploaded.');
+    return;
+  }
 
-  res.send('File data : '+ req.files.pdf.tempFilePath +" after "+ req.files.pdf.data);
+  res.send('Preference: '+ req.body.plateform +'File data : '+ req.files.pdf.tempFilePath + "data: "+ req.files.pdf.data);
 
   // sampleFile = req.files.sampleFile;
 
