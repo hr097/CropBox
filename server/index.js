@@ -56,16 +56,13 @@ sample call object:
 
 app.post('/api/upload', function(req, res) {
 
-  let fileName_ = req.files.pdf.name;
-
-  let fileExtention_= fileName_.slice(fileName_.lastIndexOf('.'));
+ let fileExt = path.extname(req.files.pdf.name);
   
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   res.status(400).send('No files were uploaded.');
-  //   return;
-  // }
-  //else 
-  if(fileExtention_!=".pdf")
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send('No files were uploaded.');
+    return;
+  }
+  else if(fileExt!=".pdf")
   {
     res.send("Only PDF file is allowed!!");
   }
