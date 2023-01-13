@@ -86,14 +86,15 @@ app.post('/api/upload', function(req, res) {
     .crop(170, 23,255, 350) // offset in points from left, bottom, right, top (doesn't work reliably yet)
     .pdfStream();
 
-    res.sendFile(pdf);
+    
 
-    // pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function(){
-    //  console.log("We're done!");
+    pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function(){
+      res.sendFile(req.files.pdf.name);
+      console.log("We're done!");
      
-    // }).on('error',function(err){
-    // res.send(JSON.stringify({"response":500}));
-    // });
+    }).on('error',function(err){
+    res.send(JSON.stringify({"response":500}));
+    });
 
    }
    else if(req.body.plateform=="meesho")
