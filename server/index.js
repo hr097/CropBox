@@ -47,6 +47,8 @@ client.connect().then( () => {
 
 2)body
 
+"pdf" : {PDF-SHOULD-BE-UPLOADED}
+"plateform" : "flipkart" / "meesho"
 
 
 */
@@ -57,16 +59,15 @@ app.post('/api/upload', function(req, res) {
 
   //  if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
   //  {
-  //     res.send('Invalid Request!');
+  //     res.send(JSON.stringify({"response":401}));//'Unauthorised Request!'
   //  }
   //  else 
   if (!req.files || Object.keys(req.files).length === 0) {
-     res.status(400).send('No files were uploaded.');
-     return;
+     res.send(JSON.stringify({"response":400}));//'No files were uploaded.'
    }
    else if(fileExt!=".pdf")
    {
-     res.send("Only PDF file is allowed!!");
+     res.send(JSON.stringify({"response":406})); //"Only PDF file is allowed!!"
    }
    else if(req.body.plateform=="flipkart")
    {
@@ -78,7 +79,7 @@ app.post('/api/upload', function(req, res) {
    }
    else
    {
-     res.send('Something went wrong!!');
+     res.send(JSON.stringify({"response":503})); //'Something went wrong!!'
    }
  
  });
