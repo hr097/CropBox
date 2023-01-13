@@ -20,7 +20,7 @@ function App() {
                   <span class="drop-title labelText">Drop File Here</span>
                 or
                   <input type="file"  name="pdf" id="pdfs" accept=".pdf" required/>
-              
+  
                   <select id="plateform" name="plateform" required>
                     <option value="flipkart">Flipkart</option>
                     <option value="meesho">Meesho</option>

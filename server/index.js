@@ -39,13 +39,62 @@ client.connect().then( () => {
 //     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
 // });
 
+/*
+
+1)header
+"api_token":"cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261"
+
+
+2)body
+
+
+
+*/
+
+app.post('/api/upload', function(req, res) {
+
+  let fileExt = path.extname(req.files.pdf.name);
+
+   if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
+   {
+      res.send('Something went wrong!!');
+   }
+   else if (!req.files || Object.keys(req.files).length === 0) {
+     res.status(400).send('No files were uploaded.');
+     return;
+   }
+   else if(fileExt!=".pdf")
+   {
+     res.send("Only PDF file is allowed!!");
+   }
+   else if(req.body.plateform=="flipkart")
+   {
+     res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+   }
+   else if(req.body.plateform=="meesho")
+   {
+     res.send('name: '+ req.files.pdf.name +' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+   }
+   else
+   {
+     res.send('Something went wrong!!');
+   }
+ 
+ });
+ 
+
 //TODO: SUBMIT FEEDBACK API
 
 /*
 sample call object:
 
- {   
-    "api_token" : "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261",
+1)header:
+
+"api_token" : "cropBox1008kbno9submitfeedbackk5rjsnnr9yco2vlfgzw9nu5261"
+
+2)body:
+
+{   
     "name": "Harshil Ramani",
     "email": "harshilramani9777@gmail.com",
     "rating": 5,
@@ -54,42 +103,17 @@ sample call object:
 
 */
 
-app.post('/api/upload', function(req, res) {
-
- let fileExt = path.extname(req.files.pdf.name);
-  
-  if (!req.files || Object.keys(req.files).length === 0) {
-    res.status(400).send('No files were uploaded.');
-    return;
-  }
-  else if(fileExt!=".pdf")
-  {
-    res.send("Only PDF file is allowed!!");
-  }
-  else if(req.body.plateform=="flipkart")
-  {
-    res.send('name: '+ req.files.pdf.name + 'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
-  }
-  else if(req.body.plateform=="meesho")
-  {
-    res.send('name: '+ req.files.pdf.name +'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
-  }
-  else
-  {
-    res.send('Something went wrong!!');
-  }
-
-});
 
 
 
 app.post("/api/submitfeedback", async (req, res) => {
   
-    const user = req.body;
-  
-    if(user.api_token == "cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
+
+    if(req.headers['api_token'] == "cropBox1008kbno9submitfeedbackk5rjsnnr9yco2vlfgzw9nu5261")
     {
     
+    const user = req.body;
+
     let curdate = new Date();
     curdate = curdate.toLocaleString();
     let rating = parseInt(user.rating);
@@ -122,12 +146,12 @@ app.post("/api/submitfeedback", async (req, res) => {
   /*
   sample object:
   
-  header:
+  2)header:
   
-  key: api_token
-  value : cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261
+  "api_token": "cropBox1008kbnsubmitfeedbackjsnnwtr9yco2vlfgzw9nu5261";
+
   
-  body:
+  2)body:
   
   {
       "numOfFeedBacks":10
@@ -141,7 +165,7 @@ app.get("/api/testapi", (req, res) => {
   
 app.get("/api/getfeedbacks", (req, res) => {
     
-    if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbno9qessgzah1k5rjsnnwtr9yco2vlfgzw9nu5261")
+    if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbnsubmitfeedbackjsnnwtr9yco2vlfgzw9nu5261")
     { 
       const setLimitX = (req.body.numOfFeedBacks);
       client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimitX)).toArray().then( (data) => {
