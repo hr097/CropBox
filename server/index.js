@@ -68,11 +68,11 @@ app.post('/api/upload', function(req, res) {
   }
   else if(req.body.plateform=="flipkart")
   {
-    res.send('name: '+ req.body.plateform.name + 'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+    res.send('name: '+ req.files.pdf.name + 'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
   }
   else if(req.body.plateform=="meesho")
   {
-    res.send('name: '+ req.body.plateform.name +'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+    res.send('name: '+ req.files.pdf.name +'Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
   }
   else
   {
