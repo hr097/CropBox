@@ -86,10 +86,8 @@ app.post('/api/upload', function(req, res) {
     .crop(170, 23,255, 350) // offset in points from left, bottom, right, top (doesn't work reliably yet)
     .pdfStream();
 
-    
-
     pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function(){
-      res.sendFile(req.files.pdf.name);
+      res.sendFile("/tmp/"+req.files.pdf.name);
       console.log("We're done!");
      
     }).on('error',function(err){
