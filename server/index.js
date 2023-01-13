@@ -55,11 +55,12 @@ app.post('/api/upload', function(req, res) {
 
   let fileExt = path.extname(req.files.pdf.name);
 
-   if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
-   {
-      res.send('Invalid Request!');
-   }
-   else if (!req.files || Object.keys(req.files).length === 0) {
+  //  if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
+  //  {
+  //     res.send('Invalid Request!');
+  //  }
+  //  else 
+  if (!req.files || Object.keys(req.files).length === 0) {
      res.status(400).send('No files were uploaded.');
      return;
    }
