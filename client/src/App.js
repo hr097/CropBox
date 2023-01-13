@@ -1,13 +1,16 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import { useRef } from "react";
 import './App.css';
 
 function App() {
+  const textInput = useRef(null);
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <form ref='uploadForm' 
+      </header> */}
+      <form 
+            ref = {textInput}
             id='uploadForm' 
             action='/api/upload' 
             method='post' 
