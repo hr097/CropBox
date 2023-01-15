@@ -5,7 +5,8 @@ const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express(); 
-var scissors = require('scissors');
+var pdfspin = require('pdfspin');
+var fs = require('fs');
 // const http = require('http');
 const logger = require("morgan");
 const cors = require("cors");
@@ -81,18 +82,18 @@ app.post('/api/upload', function(req, res) {
 
      //TODO: PDF CROPING
 
-    // Use and chain any of these commands...
-    var pdf = scissors(req.files.pdf.tempFilePath)
-    .crop(170, 23,255, 350) // offset in points from left, bottom, right, top (doesn't work reliably yet)
-    .pdfStream();
+      // Use and chain any of these commands...
+    var pdf = pdfspin(req.files.pdf.tempFilePath).crop(170, 23,255, 350) // left, bottom, right, top
 
-    pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function(){
-      res.sendFile("/tmp/"+req.files.pdf.name);
+    pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function () {
+      res.sendFile(req.files.pdf.name);
       console.log("We're done!");
-     
-    }).on('error',function(err){
-    res.send(JSON.stringify({"response":500}));
-    });
+    })
+    .on('error', function (err) 
+    {
+      res.send(JSON.stringify({"response":500}));
+    }); // PDF of compiled output
+
 
    }
    else if(req.body.plateform=="meesho")
