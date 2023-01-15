@@ -5,7 +5,8 @@ const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express(); 
-var pdfspin = require('pdfspin');
+const PythonShell = require('python-shell').PythonShell;
+var scissors = require('scissors');
 var fs = require('fs');
 // const http = require('http');
 const logger = require("morgan");
@@ -62,6 +63,7 @@ client.connect().then( () => {
 
 app.post('/api/upload', function(req, res) {
 
+  
   let fileExt = path.extname(req.files.pdf.name);
 
   //  if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
@@ -78,22 +80,54 @@ app.post('/api/upload', function(req, res) {
    }
    else if(req.body.plateform=="flipkart")
    {
-     //res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+   
 
      //TODO: PDF CROPING
 
       // Use and chain any of these commands...
-    var pdf = pdfspin(req.files.pdf.tempFilePath).crop(170, 23,255, 350) // left, bottom, right, top
+    // var pdf = pdfspin(req.files.pdf.tempFilePath).crop(170, 23,255, 350) // left, bottom, right, top
 
-    pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function () {
-      res.sendFile(req.files.pdf.name);
-      console.log("We're done!");
-    })
-    .on('error', function (err) 
-    {
-      res.send(JSON.stringify({"response":500}));
-    }); // PDF of compiled output
+    // pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function () {
+    //   res.sendFile(req.files.pdf.name);
+    //   console.log("We're done!");
+    // })
+    // .on('error', function (err) 
+    // {
+    //   res.send(JSON.stringify({"response":500}));
+    // }); // PDF of compiled output
 
+  
+  
+   // res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+    
+    let  pdf_name = req.files.pdf;
+    let uploadPath = __dirname  + pdf_name.name;
+  
+    // Use the mv() method to place the file somewhere on your server
+    pdf_name.mv("input.pdf", function(err) {
+      if (err)
+        return res.status(500).send(err);
+  
+     // res.send('File uploaded!');
+    });
+    
+    
+    // var pdf = scissors(__dirname  + pdf_name.name)
+    // .crop(170, 23,255, 350) // offset in points from left, bottom, right, top (doesn't work reliably yet)
+    // .pdfStream();
+    
+    // pdf.pdfStream().pipe(fs.createWriteStream(__dirname  + pdf_name.name)).on('finish', function(){
+    //   res.sendFile(__dirname  + pdf_name.name+"1");
+    //   console.log("We're done!");
+
+    // }).on('error',function(err){
+    //   res.send(JSON.stringify({"response":500}));
+    // });
+    PythonShell.run("index.py", null, function (err) {
+      if (err) throw err;
+      console.log('finished');
+    });
+    res.send('File finished!');
 
    }
    else if(req.body.plateform=="meesho")
