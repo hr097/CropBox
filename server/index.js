@@ -101,15 +101,19 @@ app.post('/api/upload', function(req, res) {
    // res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
     
     let  pdf_name = req.files.pdf;
-    let uploadPath = __dirname  + pdf_name.name;
+    // let uploadPath = req.files.pdf.tempFileDir  + pdf_name.name;
   
+    fs.rename(pdf_name.tempFilePath,pdf_name.tempFileDir+"/input.pdf",function(err){
+      if(err) console.log("ERROR: "+ err);
+    })
+
     // Use the mv() method to place the file somewhere on your server
-    pdf_name.mv("input.pdf", function(err) {
-      if (err)
-        return res.status(500).send(err);
+    // pdf_name.mv("input.pdf", function(err) {
+    //   if (err)
+    //     return res.status(500).send(err);
   
-     // res.send('File uploaded!');
-    });
+    //  // res.send('File uploaded!');
+    // });
     
     
     // var pdf = scissors(__dirname  + pdf_name.name)
