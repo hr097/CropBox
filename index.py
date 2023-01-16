@@ -3,7 +3,7 @@
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
-with open("input.pdf", "rb") as in_f:
+with open("/tmp/input.pdf", "rb") as in_f:
     input1 = PdfFileReader(in_f)
     output = PdfFileWriter()
 
@@ -21,5 +21,5 @@ with open("input.pdf", "rb") as in_f:
         page.cropBox.lowerRight = new_lowerRight
         output.addPage(page)
 
-    with open("output.pdf", "wb") as out_f:
+    with open("/tmp/output.pdf", "wb") as out_f:
         output.write(out_f)
