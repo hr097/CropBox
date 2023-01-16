@@ -101,7 +101,7 @@ app.post('/api/upload', function(req, res) {
   //  res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
     
     let  pdf_name = req.files.pdf;
-  
+    
     fs.rename(pdf_name.tempFilePath,"/tmp/input.pdf",function(err){
       if(err) console.log("ERROR: "+ err);
     })

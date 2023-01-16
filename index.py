@@ -21,5 +21,5 @@ with open("/tmp/input.pdf", "rb") as in_f:
         page.cropBox.lowerRight = new_lowerRight
         output.addPage(page)
 
-    with open("/tmp/output.pdf", "wb") as out_f:
+    with open("output.pdf", "wb") as out_f:
         output.write(out_f)
