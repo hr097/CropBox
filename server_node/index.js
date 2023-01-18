@@ -215,7 +215,7 @@ app.post("/api/submitfeedback", async (req, res) => {
   
   2)header:
   
-  "api_token": "cropBox1008kbnsubmitfeedbackjsnnwtr9yco2vlfgzw9nu5261";
+  "api_token": "cropBox1008kbngetfeedbackjsnnwtr9yco2vlfgzw9nu5261";
 
   
   2)body:
