@@ -1,24 +1,9 @@
-
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
-import pandas as pd
-import ast
-app = Flask(__name__)
-api = Api(app)
+from sanic import Sanic
+from sanic.response import json
+app = Sanic()
 
 
-class Users(Resource):
-    # methods go here
-    def get(self):
-        return "ok"
-    pass
-
-api.add_resource(Users, '/')
-
-if __name__ == '__main__':
-    app.run()  # run our Flask app
-
-
-
-
-
+@app.route('/')
+@app.route('/helloWorld')
+async def index(request, path=""):
+    return json({'hello': path})
