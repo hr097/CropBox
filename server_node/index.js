@@ -218,7 +218,7 @@ app.post("/api/submitfeedback", async (req, res) => {
   
 app.get("/api/getfeedbacks", (req, res) => {
     
-    if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbnsubmitfeedbackjsnnwtr9yco2vlfgzw9nu5261")
+    if(req.body.numOfFeedBacks!=undefined&&req.body.numOfFeedBacks!=0&&req.headers['api_token']=="cropBox1008kbngetfeedbackjsnnwtr9yco2vlfgzw9nu5261")
     { 
       const setLimitX = (req.body.numOfFeedBacks);
       client.db("CropBox").collection("UsersReview").find({}).limit(parseInt(setLimitX)).toArray().then( (data) => {
