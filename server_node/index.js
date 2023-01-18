@@ -63,11 +63,12 @@ app.post('/api/upload', function(req, res) {
   
   let fileExt = path.extname(req.files.pdf.name);
 
-   if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
-   {
-      res.send(JSON.stringify({"response":401}));//'Unauthorised Request!'
-   }
-   else if (!req.files || Object.keys(req.files).length === 0) {
+  //  if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
+  //  {
+  //     res.send(JSON.stringify({"response":401}));//'Unauthorised Request!'
+  //  }
+  //  else
+    if (!req.files || Object.keys(req.files).length === 0) {
      res.send(JSON.stringify({"response":400}));//'No files were uploaded.'
    }
    else if(fileExt!=".pdf")
@@ -98,9 +99,8 @@ app.post('/api/upload', function(req, res) {
 
     PythonShell.run("index.py", null, function (err) {
       if (err) throw err;
-      console.log('finished');
       ///res.send("<a href='output.pdf'>DOWNLOAD</a>");
-      res.send("TEST DONE");
+      res.download(__dirname+"/output.pdf");
     });
 
   //   Use the mv() method to place the file somewhere on your server
