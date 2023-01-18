@@ -1,25 +1,24 @@
-# from http.server import BaseHTTPRequestHandler
-from sanic import Sanic
-from sanic.response import json
 
-app = Sanic()
-
-# class handler(BaseHTTPRequestHandler):
-
-#     def do_GET(self):
-#         self.send_response(200)
-#         self.send_header('Content-type','application/json')
-#         self.end_headers()
-#         self.wfile.write('Hello, world!'.encode('utf-8'))
-#         return
+from flask import Flask
+from flask_restful import Resource, Api, reqparse
+import pandas as pd
+import ast
+app = Flask(__name__)
+api = Api(app)
 
 
-@app.route('/')
-def index(request, path=""):
-    return json({'hello': path})
+class Users(Resource):
+    # methods go here
+    def get(self):
+        return "ok"
+    pass
 
-@app.route('/testing')
-def index(request, path=""):
-    return json({'hello': path})
+api.add_resource(Users, '/')
+
+if __name__ == '__main__':
+    app.run()  # run our Flask app
+
+
+
 
 
