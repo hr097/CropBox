@@ -1,5 +1,5 @@
 
-// dependencies 
+//TODO: DEPENDENCIES
 
 const path = require('path');
 const express = require('express');
@@ -8,16 +8,15 @@ const app = express();
 const PythonShell = require('python-shell').PythonShell;
 var scissors = require('scissors');
 var fs = require('fs');
-// const http = require('http');
 const logger = require("morgan");
 const cors = require("cors");
+
+//TODO: CONFIGURATION
 
 app.use(logger("dev"));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())
-
-
 app.use(fileUpload({
   useTempFiles : true,
   tempFileDir : '/tmp/'
@@ -25,7 +24,10 @@ app.use(fileUpload({
 
 const port = process.env.PORT || 3000;
 
-//DB connection //8bfdbld4aRo7AA7r | 
+
+//TODO: DATA BASE CONNECT
+
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://vercel-admin-user:8bfdbld4aRo7AA7r@cropbox.gn6wpxt.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -37,14 +39,9 @@ client.connect(function(){
 })
 
 
-// app.get('/',(req,res)=>{
-//     app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
-//     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
-// });  
 
 
-
-
+//TODO: PDF CROPING
 
 
 /*
@@ -66,12 +63,11 @@ app.post('/api/upload', function(req, res) {
   
   let fileExt = path.extname(req.files.pdf.name);
 
-  //  if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
-  //  {
-  //     res.send(JSON.stringify({"response":401}));//'Unauthorised Request!'
-  //  }
-  //  else 
-  if (!req.files || Object.keys(req.files).length === 0) {
+   if(req.headers['api_token'] != "cropBox1008kbno9uploadcrnsknuashkc5rjsnnr9yco2vlfgzw9nu5261")
+   {
+      res.send(JSON.stringify({"response":401}));//'Unauthorised Request!'
+   }
+   else if (!req.files || Object.keys(req.files).length === 0) {
      res.send(JSON.stringify({"response":400}));//'No files were uploaded.'
    }
    else if(fileExt!=".pdf")
@@ -80,11 +76,8 @@ app.post('/api/upload', function(req, res) {
    }
    else if(req.body.plateform=="flipkart")
    {
-   
-
-     //TODO: PDF CROPING
-
-      // Use and chain any of these commands...
+  
+    // Use and chain any of these commands...
     // var pdf = pdfspin(req.files.pdf.tempFilePath).crop(170, 23,255, 350) // left, bottom, right, top
 
     // pdf.pdfStream().pipe(fs.createWriteStream(req.files.pdf.name)).on('finish', function () {
@@ -95,10 +88,7 @@ app.post('/api/upload', function(req, res) {
     // {
     //   res.send(JSON.stringify({"response":500}));
     // }); // PDF of compiled output
-
-  
-  
-  //  res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
+    //  res.send('name: '+ req.files.pdf.name + ' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
     
     let  pdf_name = req.files.pdf;
     
@@ -134,12 +124,11 @@ app.post('/api/upload', function(req, res) {
     //   res.send(JSON.stringify({"response":500}));
     // });
 
-
-    
-
    }
    else if(req.body.plateform=="meesho")
    {
+
+    //! REMAINING...
      res.send('name: '+ req.files.pdf.name +' Preference: '+ req.body.plateform +'\nFile stored : '+ req.files.pdf.tempFilePath);
    }
    else
@@ -226,9 +215,6 @@ app.post("/api/submitfeedback", async (req, res) => {
   
   */
 
-app.get("/api/testapi", (req, res) => {
-      return res.send("It's good to go!");
-});
   
 app.get("/api/getfeedbacks", (req, res) => {
     
@@ -249,6 +235,9 @@ app.get("/api/getfeedbacks", (req, res) => {
   
 });
   
+app.get("/api/testapi", (req, res) => {
+  return res.send("It's good to go!");
+});
 
 app.get("/",(req,res)=>{
     console.log(path.resolve(path.resolve(__dirname,".."), 'client','build'));
