@@ -24,23 +24,23 @@ app.use(fileUpload({
 }));
 
 const port = process.env.PORT || 3000;
+
+//DB connection //8bfdbld4aRo7AA7r | 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-
-
-//DB connection
-const uri = "mongodb+srv://vercel-admin-user:e4oVmsOLn8qcHPmg@cropbox.gn6wpxt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://vercel-admin-user:8bfdbld4aRo7AA7r@cropbox.gn6wpxt.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect().then( () => {
+
+client.connect(function(){
   console.log('Connected to the database ');
-})
-.catch( (err) => {
+},function(){
   console.error(`Error connecting to the database. n${err}`);
-});
+})
+
 
 // app.get('/',(req,res)=>{
 //     app.use(express.static(path.resolve(__dirname, 'cropbox','build')))
 //     res.sendFile(path.resolve(__dirname,'cropbox','build','index.html'))
-// });
+// });  
 
 
 
