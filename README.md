@@ -9,7 +9,7 @@
    Best PDF Cropping Tool For Online Resellers of Flipkart & Meesho
     <br />
   </p>
-  <a  href="https://cropbox.vercel.app" target="_blank" >View Demo</a>
+  <a  href="https://cropbox.vercel.app" target="blank" >View Demo</a>
 </div>
 
 <br>
