@@ -1,5 +1,5 @@
-#python get-pip.py
-#python -m pip install PyPDF2
+# python get-pip.py
+# python -m pip install PyPDF2
 
 from PyPDF2 import PdfWriter, PdfReader
 
@@ -24,3 +24,9 @@ with open("/tmp/input.pdf", "rb") as in_f:
 
     with open("output.pdf", "wb") as out_f:
         output.write(out_f)
+
+
+
+
+
+
