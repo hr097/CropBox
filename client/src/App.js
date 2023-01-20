@@ -1,37 +1,19 @@
-import logo from './cropbox.png';
-import { useRef } from "react";
-import './App.css';
-
+import * as React from "react";
+import "./assets/style/App.css";
+import Meesho from "./screens/Meesho";
+import Feedback from "./screens/Feedback";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Flipkart from "./screens/Flipkart";
 function App() {
-  const textInput = useRef(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" id="mainlogo" alt="CropBox" />
-      
-           <form 
-              ref = {textInput}
-              id='uploadForm' 
-              action='/api/upload' 
-              method='post' 
-              encType="multipart/form-data">
-
-              <label for="images" class="drop-container labelText">
-                  <span class="drop-title labelText">Drop File Here</span>
-                or
-                  <input type="file"  name="pdf" id="pdfs" accept=".pdf" required/>
-  
-                  <select id="plateform" name="plateform" required>
-                    <option value="flipkart">Flipkart</option>
-                    <option value="meesho">Meesho</option>
-                  </select>
-
-                  <input type='submit' class="button-1" role="button" value='Upload' />
-              </label>
-          </form>	
-        </header>
-    </div>
-    
+    <Router>
+      <Routes>
+        <Route path="/" element={<Flipkart />}></Route>
+        <Route path="/flipkart" element={<Flipkart />}></Route>
+        <Route path="/meesho" element={<Meesho />}></Route>
+        <Route path="/feedback" element={<Feedback />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
