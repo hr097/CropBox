@@ -118,7 +118,6 @@ function getCount(str) {
     }).length;
 }
 
-
 const style = {
     outerWrapper: {
         width: "100%",
