@@ -117,6 +117,7 @@ function getCount(str) {
     return num !== "";
     }).length;
 }
+
 const style = {
     outerWrapper: {
         width: "100%",
