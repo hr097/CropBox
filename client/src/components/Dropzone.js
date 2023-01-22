@@ -9,8 +9,11 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from '@mui/material/Alert';
+import Loader from './Loader.js';
+
 
 import "../assets/style/Dropzone.css";
+import { Box } from "@mui/system";
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -22,6 +25,7 @@ const FileInput = props => {
     const [openAlert, setopenAlert] = useState(false);
     const [msgAlert, setmsgAlert] = useState("");
     const [typeAlert, settypeAlert] = useState("success");
+    const [showLoader , setshowLoader] = useState(false);
 
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -61,6 +65,7 @@ const FileInput = props => {
     const upload = () => {
         if(inputFile.length > 0)
         {
+            setshowLoader(true);
             let formData = new FormData();
             formData.append("userid",50253);
             formData.append("filename", inputFile[0]);
@@ -73,70 +78,90 @@ const FileInput = props => {
             {
                 path = "https://cropbox.onrender.com/upload-for-meesho"
             }
-            axios.post(path,formData,{
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-            })
-            .then((response) => {
-                if(response.status === 200)
-                {
-                    handleOpen("File has been uploaded","success")
-                    setoutputFile(response.data.filename);
-                    setbuttonType("Download");
-                }
-                else
-                {
-                    handleOpen(response.statusText,"error")
-                }
+            setTimeout(()=>{
+                axios.post(path,formData,{
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+                .then((response) => {
+                        if(response.status === 200)
+                        {
+                            handleOpen("file has been cropped successfully.","success")
+                            setoutputFile(response.data.filename);
+                            setbuttonType("Download");
+                            setshowLoader(false);
+                        }
+                        else
+                        {
+                            handleOpen(response.statusText,"error")
+                            setshowLoader(false);
+                        }
+        
+                })
+                .catch((err) => {
+                        handleOpen(err,"error")
+                        setshowLoader(false);
+                });
+            },5000);
 
-            })
-            .catch((err) => {
-                handleOpen(err,"error")
-                
-            });
         }
     }
 
     //delete file from the server
     const deletefile = () =>{
+        
         let path =  "https://cropbox.onrender.com/delete";
-        axios.post(path,{'filename':outputFile})
+        axios.post(path,{'filename':outputFile},{headers:{
+            'Content-Type':'application/json'
+        }})
         .then((response) => {
             console.log(response);
         })
         .catch((err) => {
             console.log(err);
         });
+        
     }
 
     //download pdf from server
     const download = () =>
     {
+        setshowLoader(true);
         let path =  "https://cropbox.onrender.com/get-pdf";
-        axios.post(path,{'filename':outputFile},{
-            responseType: 'blob'
-        })
-        .then((response) => {
-            if(response.status === 200)
-            {
-                deletefile();
-                handleOpen("File has been downloaded successfully","success")
-                let linkSource = window.URL.createObjectURL(new Blob([response.data],{type: "application/pdf"}));
-                let downloadLink = document.createElement('a');
-                downloadLink.href = linkSource;
-                downloadLink.download = outputFile;
-                downloadLink.click();
-                setbuttonType("Upload");
-            }
-            else
-            {
-                handleOpen(response.statusText,"error");
-            }
-        })
-        .catch((err) => {
-            handleOpen(err,"error");
-        });
+        setTimeout(()=>{
+            axios.post(path,{'filename':outputFile},{
+                responseType: 'blob'
+            })
+            .then((response) => {
+                if(response.status === 200)
+                {
+                    deletefile();
+                    handleOpen("File has been downloaded successfully.","success")
+                    let linkSource = window.URL.createObjectURL(new Blob([response.data],{type: "application/pdf"}));
+                    let downloadLink = document.createElement('a');
+                    downloadLink.href = linkSource;
+                    downloadLink.download = `CropBox_${(props.type).toLowerCase()}_label.pdf`;
+                    downloadLink.click();
+                    setbuttonType("Upload");
+                    setshowLoader(false);
+                    setopenAlert(false);
+                    setTimeout(()=>{
+                        fileRemove(inputFile[0]);
+                    },1000)
+                    
+                }
+                else
+                {
+                    handleOpen(response.statusText,"error");
+                    setshowLoader(false);
+                }
+            })
+            .catch((err) => {
+                handleOpen(err,"error");
+                setshowLoader(false);
+            });
+        },3000);
     }
 
     return (
@@ -160,13 +185,16 @@ const FileInput = props => {
                                     <img src={ImageConfig[item.type.split('/')[1]] || ImageConfig['default']} alt="" />
                                     <div className="drop-file-preview__item__info">
                                         <p>{item.name}</p>
-                                        <p>{item.size}B</p>
+                                        <p>{(item.size/1000).toFixed(1)}KB</p>
                                     </div>
                                     <span className="drop-file-preview__item__del" onClick={() => fileRemove(item)}><ClearIcon  fontSize="small"/></span>
                                 </div>
                             ))
                         }
-                        <Button variant="contained" onClick={buttonType==="Upload"?upload:download} sx={{display:'block',padding:'10px 38px',margin:"25px auto auto auto",backgroundColor:"#5B3F89",fontWeight:"900",'&:hover': {backgroundColor: '#8462bc'}}}>{buttonType}</Button>
+                        <Box>
+                        <Button variant="contained" onClick={buttonType==="Upload"?upload:download} sx={{display:(showLoader===false?'block':'none'),padding:'10px 38px',margin:"25px auto",backgroundColor:"#5B3F89",fontWeight:"900",'&:hover': {backgroundColor: '#8462bc'}}}>{buttonType}</Button>
+                        <Loader show={showLoader}/>
+                        </Box>
                     </div>
                     
                 ) : null

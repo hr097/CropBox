@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Dropzone from "../components/Dropzone";
-
+import Footer from "../components/Footer";
 function Meesho(props) {
     const style = {
         outerBox: {
@@ -27,16 +27,27 @@ function Meesho(props) {
         title: {
             fontFamily: "Open Sans",
             fontWeight: 'bold',
-            fontSize: { xs: "20px", sm: "20px", md: "35px", lg: "45px" },
+            fontSize: { xs: "20px", sm: "20px", md: "35px", lg: "40px" },
             margin: "15px auto",
-            textAlign: "center",
-            color:'#2a2a2a'
+            color:'#2a2a2a',
+            textTransform:'uppercase',
+            textAlign:'center'
         },
         tagLine:{
             fontFamily: "Open Sans",
             textAlign: "center",
             display: "block",
-            margin: "15px auto 20px"
+            margin: "15px auto 20px",
+            color:'#8e8e8e'
+        },
+        topLine:{
+            fontFamily: "Open Sans",
+            margin: "20px auto 15px",
+            color:'#5B3F89',
+            display:'block',
+            fontWeight:900,
+            textAlign:'center',
+            textTransform:'uppercase'
         }
     };
     return (
@@ -45,16 +56,20 @@ function Meesho(props) {
             <Box sx={style.outerBox}>
                 <Box sx={style.innerSideBox} />
                 <Box sx={style.innerMiddleBox}>
-                <Typography variant="h3" sx={style.title}>
-                    Crop Meesho Shippment Labels
-                </Typography>
-                <Typography variant="span"  sx={style.tagLine}>
-                    The Easiest way to mange Meesho order shippments. Crop shipping labels with us.
-                </Typography>
-                <Dropzone type="Meesho" />
+                    <Typography variant="span"  sx={style.topLine}>
+                        Drop / Crop / Download
+                    </Typography>
+                    <Typography variant="h3" sx={style.title}>
+                        Crop Meesho Shippments Label
+                    </Typography>
+                    <Typography variant="span"  sx={style.tagLine}>
+                        The Easiest way to mange Meesho order shippments. Crop shipping labels with us.
+                    </Typography>
+                    <Dropzone type="Meesho" />
                 </Box>
                 <Box sx={style.innerSideBox} />
             </Box>
+            <Footer />
         </Box>
     );
 }
