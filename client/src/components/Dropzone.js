@@ -36,8 +36,9 @@ const FileInput = props => {
 
     const handleOpen = (msg,type) => {
         setmsgAlert(msg);
-        setopenAlert(true);
         settypeAlert(type);
+        setopenAlert(true);
+      
     };
 
     const onDragEnter = () => wrapperRef.current.classList.add('dragover');

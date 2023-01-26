@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import Dropzone from "../components/Dropzone";
 import Footer from "../components/Footer";
-
+import ShowFeedbacks from "../components/showFeedbacks";
 
 function Flipkart(props) {
     const style = {
@@ -15,7 +15,7 @@ function Flipkart(props) {
         },
         innerSideBox: {
             width: { sm: "100%", md: "100%", lg: "20%" },
-            height: { xs: "10px", sm: "100px", md: "100px", lg: "100%" }
+            height: { xs: "10px", sm: "100%", md: "100%", lg: "100%" }
         },
         innerMiddleBox: {
             width: { sm: "100%", md: "100%", lg: "60%" },
@@ -44,7 +44,7 @@ function Flipkart(props) {
         },
         topLine:{
             fontFamily: "Open Sans",
-            margin: "20px auto 15px",
+            margin: "35px auto 15px",
             color:'#5B3F89',
             display:'block',
             fontWeight:900,
@@ -69,6 +69,10 @@ return (
                 labels with us.
             </Typography>
             <Dropzone type="Flipkart" />
+            <Typography sx={style.topLine}>
+                        FEEDBACKS
+            </Typography>
+            <ShowFeedbacks/>
             </Box>
             <Box sx={style.innerSideBox} />
         </Box>

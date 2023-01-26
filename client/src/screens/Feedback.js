@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import FeedbackForm from "../components/feedbackForm";
+//import ShowFeedbacks from "../components/showFeedbacks";
 
 function Feedback(props) {
     const style = {
@@ -15,7 +16,7 @@ function Feedback(props) {
         },
         innerSideBox: {
             width: { sm: "100%", md: "100%", lg: "20%" },
-            height: { xs: "10px", sm: "100px", md: "100px", lg: "100%" }
+            height: { xs: "10px",  sm: "100%", md: "100%", lg: "100%"  }
         },
         innerMiddleBox: {
             width: { sm: "100%", md: "100%", lg: "60%" },
@@ -59,7 +60,7 @@ return (
             <Box sx={style.innerSideBox} />
             <Box sx={style.innerMiddleBox}>
             <Typography variant="span" sx={style.topLine}>
-                FEEDBACKS
+                FEEDBACK
             </Typography>
             <Typography variant="h3" sx={style.title}>
                 We want to hear your feedback
@@ -68,9 +69,11 @@ return (
                 Give your valuable opinion here because your opinions matter to us.
             </Typography>
             <FeedbackForm/>
+            
             </Box>
-            <Box sx={style.innerSideBox} />
-        </Box>
+            <Box sx={style.innerSideBox} >
+            </Box>
+            </Box>
             <Footer/>
         </Box>
     );
