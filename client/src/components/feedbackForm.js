@@ -143,7 +143,7 @@ const handleOpen = (msg,type) => {
 const [Msg, setMsg] = React.useState("");
 const [Email,setEmail] = React.useState("");
 const [Name,setName] = React.useState("");
-const [ratingFeed,setRating] = React.useState(1);
+const [ratingFeed,setRating] = React.useState(4);
 const [openAlert, setopenAlert] = React.useState(false);
 const [msgAlert, setmsgAlert] = React.useState("");
 const [typeAlert, settypeAlert] = React.useState("success");
