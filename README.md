@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="client/src/cropbox2.png" alt="Logo" width="190" height="180">
+    <img src="client/src/cropbox2.png" alt="CropBox Logo" width="190" height="180">
   </a>
 
 <h3 align="center">CropBox</h3>
