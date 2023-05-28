@@ -22,7 +22,7 @@ const port = process.env.PORT || 3000;
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://vercel-admin-user:8bfdbld4aRo7AA7r@cropbox.gn6wpxt.mongodb.net/?retryWrites=true&w=majority";
+const uri = "____URL_LINK_TO_MONGODB_ATLAS_____"; // REPLACE HERE
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 client.connect(function(){
