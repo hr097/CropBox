@@ -15,8 +15,8 @@
 <br>
 <br>
   <h3 align="center">Tools and Technologies</h3>
-  <h1>THIS REPOSITORY USES THE BELOW REPOSITORY AS A PART OF PROJECT'S CORE API AND FEATURES</h1>
-   <a  href="[https://cropbox.vercel.app](https://github.com/hr097/cropbox-python-api)" target="_blank" rel="noopener noreferrer" >CropBox PYthon API BY Team CropBox</a>
+  <h2>THIS REPOSITORY USES THE BELOW REPOSITORY AS A PART OF PROJECT'S CORE API AND FEATURES</h2>
+   <div align="center" ><a  href="https://github.com/hr097/cropbox-python-api" target="_blank" rel="noopener noreferrer">CropBox PYthon API BY Team CropBox</a></div>
 <br>
 <br>
 
