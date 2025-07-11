@@ -29,6 +29,7 @@
   ![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
   ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
   ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+  ![Render](https://img.shields.io/badge/BASH-4EA94B?style=for-the-badge&logo=bash&logoColor=grey)
 
   ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
   ![Render](https://img.shields.io/badge/Render_Cloud-4EA94B?style=for-the-badge&logo=render&logoColor=white)
